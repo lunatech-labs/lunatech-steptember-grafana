@@ -9,10 +9,10 @@ datasources:
    type: mysql
    access: proxy
    orgId: 1
-   url: ${MYSQL_DOMAIN}:${MYSQL_PORT}
-   password: ${MYSQL_PASSWORD}
-   user: ${MYSQL_USERNAME}
-   database: ${MYSQL_DATABASE}
+   url: ${MYSQL_ADDON_HOST}:${MYSQL_ADDON_PORT}
+   password: ${MYSQL_ADDON_PASSWORD}
+   user: ${MYSQL_ADDON_USER}
+   database: ${MYSQL_ADDON_DB}
    isDefault: true
    jsonData:
       keepCookies: []
