@@ -23,12 +23,179 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "description": "",
       "fill": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 0
+      },
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \n  `teams`.`name` as 'team_name', \n  `subquery`.`steps` as 'steps',\n  `subquery`.`time` as 'time'\nFROM teams, (\n    SELECT  \n      MAX(`participants`.`team_id`) as 'team_id',\n      SUM(`records`.`calories_burnt`) as 'steps', \n      MAX(`records`.`time`) as 'time'\n    FROM `records` \n    INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\n    GROUP BY UNIX_TIMESTAMP(`records`.`time`) DIV 300, `participants`.`team_id`\n) subquery \nWHERE `teams`.`id` = `subquery`.`team_id` AND $__timeFilter(`subquery`.`time`)\nORDER BY `subquery`.`time` DESC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Badly Estimated Team Calories Burnt",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT \n    `participants`.`name` as 'metric',\n    `records`.`calories_burnt` as 'value', \n    `records`.`time` as 'time'\nFROM `records` \nINNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\nWHERE $__timeFilter(`records`.`time`)\nORDER BY `records`.`time` DESC",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Badly Estimated Participant Calories Burnt",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
       },
       "id": 10,
       "legend": {
@@ -112,7 +279,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 9
       },
       "hideTimeOverride": false,
       "id": 8,
@@ -196,7 +363,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 4,
       "links": [],
@@ -222,6 +389,57 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 3,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "/distance*/",
+          "preserveFormat": false,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "number",
+          "unit": "lengthkm"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "steps",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "calories_burnt",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
           "decimals": 2,
           "pattern": "/.*/",
           "thresholds": [],
@@ -233,7 +451,7 @@
         {
           "alias": "",
           "format": "table",
-          "rawSql": "SELECT \n  SUM(`subquery`.`distance`) as 'distance',\n  SUM(`subquery`.`steps`) as 'steps',\n  SUM(`subquery`.`calories_burnt`) as 'calories_burnt'\nFROM (\n    SELECT\n      MAX(`records`.`participant_id`) as 'id',\n      MAX(`records`.`distance`) as 'distance',\n      MAX(`records`.`steps`) as 'steps',\n      MAX(`records`.`calories_burnt`) as 'calories_burnt'\n    FROM `records`\n    INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\n    WHERE $__timeFilter(`records`.`time`)\n    GROUP BY `records`.`participant_id`\n) as subquery",
+          "rawSql": "SELECT \n  SUM(`subquery`.`distance`) / 1000 as 'distance',\n  SUM(`subquery`.`steps`) as 'steps',\n  SUM(`subquery`.`calories_burnt`) as 'calories_burnt'\nFROM (\n    SELECT\n      MAX(`records`.`participant_id`) as 'id',\n      MAX(`records`.`distance`) as 'distance',\n      MAX(`records`.`steps`) as 'steps',\n      MAX(`records`.`calories_burnt`) as 'calories_burnt'\n    FROM `records`\n    INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\n    WHERE $__timeFilter(`records`.`time`)\n    GROUP BY `records`.`participant_id`\n) as subquery",
           "refId": "A"
         }
       ],
@@ -249,7 +467,7 @@
         "h": 19,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 18
       },
       "id": 2,
       "links": [],
@@ -275,6 +493,22 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "distance",
+          "thresholds": [],
+          "type": "number",
+          "unit": "lengthkm"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
           "decimals": 2,
           "pattern": "/.*/",
           "thresholds": [],
@@ -286,7 +520,7 @@
         {
           "alias": "",
           "format": "table",
-          "rawSql": "SELECT\n  `participants`.`name`,\n  MAX(`records`.`distance`) as 'distance',\n  MAX(`records`.`steps`) as 'steps',\n  MAX(`records`.`calories_burnt`) as 'calories_burnt',\n  MAX(`records`.`steps`) - MAX(`subquery`.`growth`) as 'growth'\nFROM `records`\nINNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\nLEFT JOIN (\n    SELECT\n      MAX(`records`.`steps`) as 'growth',\n      `records`.`participant_id` as 'participant_id'\n    FROM `records`\n      INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\n      WHERE `records`.`time` >= FROM_UNIXTIME($__unixEpochFrom() - ($__unixEpochTo() - $__unixEpochFrom()))\n      AND `records`.`time` <= $__timeFrom()\n     GROUP BY `records`.`participant_id`\n) as subquery ON `records`.`participant_id`=`subquery`.`participant_id`\nWHERE $__timeFilter(`records`.`time`)\nGROUP BY `records`.`participant_id`",
+          "rawSql": "SELECT\n  `participants`.`name`,\n  MAX(`records`.`distance`) / 1000 as 'distance',\n  MAX(`records`.`steps`) as 'steps',\n  MAX(`records`.`calories_burnt`) as 'calories_burnt',\n  MAX(`records`.`steps`) - MAX(`subquery`.`growth`) as 'growth'\nFROM `records`\nINNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\nLEFT JOIN (\n    SELECT\n      MAX(`records`.`steps`) as 'growth',\n      `records`.`participant_id` as 'participant_id'\n    FROM `records`\n      INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id`\n      WHERE `records`.`time` >= FROM_UNIXTIME($__unixEpochFrom() - ($__unixEpochTo() - $__unixEpochFrom()))\n      AND `records`.`time` <= $__timeFrom()\n     GROUP BY `records`.`participant_id`\n) as subquery ON `records`.`participant_id`=`subquery`.`participant_id`\nWHERE $__timeFilter(`records`.`time`)\nGROUP BY `records`.`participant_id`",
           "refId": "A"
         }
       ],
@@ -302,7 +536,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 21
       },
       "id": 6,
       "links": [],
@@ -328,6 +562,22 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 3,
+          "mappingType": 1,
+          "pattern": "distance",
+          "thresholds": [],
+          "type": "number",
+          "unit": "lengthkm"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
           "decimals": 2,
           "pattern": "/.*/",
           "thresholds": [],
@@ -339,7 +589,7 @@
         {
           "alias": "",
           "format": "table",
-          "rawSql": "SELECT \n  `teams`.`name` as 'team_name', \n  SUM(`subquery`.`distance`) as 'distance', \n  SUM(`subquery`.`steps`) as 'steps', \n  SUM(`subquery`.`calories_burnt`) as 'calories_burnt' \nFROM teams, (\n    SELECT \n      `participants`.`team_id` as 'team_id', \n      `participants`.`name`, \n      MAX(`records`.`distance`) as 'distance', \n      MAX(`records`.`steps`) as 'steps', \n      MAX(`records`.`calories_burnt`) as 'calories_burnt' \n    FROM `records` \n    INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id` \n    WHERE $__timeFilter(`records`.`time`)\n    GROUP BY `records`.`participant_id`\n) subquery \nWHERE `teams`.`id` = `subquery`.`team_id` \nGROUP BY `subquery`.`team_id`",
+          "rawSql": "SELECT \n  `teams`.`name` as 'team_name', \n  SUM(`subquery`.`distance`) / 1000 as 'distance', \n  SUM(`subquery`.`steps`) as 'steps', \n  SUM(`subquery`.`calories_burnt`) as 'calories_burnt' \nFROM teams, (\n    SELECT \n      `participants`.`team_id` as 'team_id', \n      `participants`.`name`, \n      MAX(`records`.`distance`) as 'distance', \n      MAX(`records`.`steps`) as 'steps', \n      MAX(`records`.`calories_burnt`) as 'calories_burnt' \n    FROM `records` \n    INNER JOIN `participants` ON `records`.`participant_id`=`participants`.`id` \n    WHERE $__timeFilter(`records`.`time`)\n    GROUP BY `records`.`participant_id`\n) subquery \nWHERE `teams`.`id` = `subquery`.`team_id` \nGROUP BY `subquery`.`team_id`",
           "refId": "A"
         }
       ],
@@ -356,7 +606,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now/w",
     "to": "now"
   },
   "timepicker": {
