@@ -18,6 +18,20 @@
   "links": [],
   "panels": [
     {
+      "content": "<center><h2>If the dashboard does not load, just refresh, a few thousand times, stop whining</h2></center>",
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 16,
+      "links": [],
+      "mode": "html",
+      "title": "",
+      "type": "text"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -29,7 +43,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 2
       },
       "id": 12,
       "legend": {
@@ -112,7 +126,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 2
       },
       "id": 14,
       "legend": {
@@ -195,7 +209,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 10,
       "legend": {
@@ -279,7 +293,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 11
       },
       "hideTimeOverride": false,
       "id": 8,
@@ -363,7 +377,7 @@
         "h": 3,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 20
       },
       "id": 4,
       "links": [],
@@ -467,7 +481,7 @@
         "h": 19,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 20
       },
       "id": 2,
       "links": [],
@@ -536,7 +550,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 23
       },
       "id": 6,
       "links": [],
@@ -606,7 +620,7 @@
     "list": []
   },
   "time": {
-    "from": "now/w",
+    "from": "2018-09-08T22:00:00.000Z",
     "to": "now"
   },
   "timepicker": {
